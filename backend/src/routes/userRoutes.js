@@ -1,10 +1,10 @@
 const express = require('express');
-const { createUser,getAllUsers} = require('../controllers/userController'); // Import controller
+const { createUser, getAllUsers, deleteUser } = require('../controllers/userController');
 
 const router = express.Router();
 
-// Correctly use createUser function
 router.post('/', createUser);
 router.get('/', getAllUsers);
+router.delete('/:id', deleteUser);
 
 module.exports = router;
