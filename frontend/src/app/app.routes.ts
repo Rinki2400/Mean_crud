@@ -14,5 +14,9 @@ export const routes: Routes = [
      {
        path: 'users/add',
         component: UsersFormComponent
+    },
+     {
+       path: 'users/:id',
+        component: UsersFormComponent
     }
 ];
