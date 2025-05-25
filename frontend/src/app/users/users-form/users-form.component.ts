@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import User from '../../types/user';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-users-form',
@@ -19,9 +21,22 @@ export class UsersFormComponent {
       address: ['', Validators.required],
     });
   }
-  submitForm() {
+  userSevice = inject(UserService);
+  addUser() {
     if (this.userForm.valid) {
       console.log('Form Data:', this.userForm.value);
+      const model:User = this.userForm.value as User;
+      this.userSevice.addUser(model).subscribe({
+        next: (response) => {
+          console.log('User added successfully:', response);
+          this.resetForm();
+        },
+        error: (error) => {
+          console.error('Error adding user:', error);
+        },
+      });
+
+      
     } else {
       console.log('Form is invalid');
     }
