@@ -5,8 +5,6 @@ import { RouterLink } from '@angular/router';
   selector: 'app-users',
   imports: [RouterLink],
   templateUrl: './users.component.html',
-  styleUrl: './users.component.css'
+  styleUrl: './users.component.css',
 })
-export class UsersComponent {
-
-}
+export class UsersComponent {}
