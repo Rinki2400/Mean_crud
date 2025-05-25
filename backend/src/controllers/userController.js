@@ -45,6 +45,22 @@ exports.getAllUsers = async (req, res) => {
       .json({ message: "Internal Server Error", error: err.message });
   }
 };
+exports.getByUsersId = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found." });
+    }
+
+    res.status(200).json(user);
+  } catch (error) {
+    console.error("Error fetching user by ID:", error.message);
+    res
+      .status(500)
+      .json({ message: "Internal Server Error", error: error.message });
+  }
+}
 exports.deleteUser = async (req, res) => {
   try {
     const userId = req.params.id;
@@ -104,3 +120,4 @@ exports.updateUser = async (req, res) => {
     res.status(500).json({ message: "Internal Server Error", error: error.message });
   }
 };
+

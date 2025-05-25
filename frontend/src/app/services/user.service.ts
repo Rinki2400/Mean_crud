@@ -15,4 +15,9 @@ export class UserService {
   addUser(model: User) {
     return this.httpClient.post(this.apiUrl + '/user', model);
 }
+deleteUser(id: number) {
+  return this.httpClient.delete(this.apiUrl + '/user/' + id);
+}
+
+
 }
