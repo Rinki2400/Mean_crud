@@ -1,0 +1,13 @@
+.container-fluid{
+
+    a{
+        font-weight: 600;
+        color: beige;
+        text-decoration: none;
+        padding: 0.5rem 0;
+
+        &:hover{
+            color: #8a8787;
+        }
+    }
+}
