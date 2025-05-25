@@ -1,29 +1,29 @@
-<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
-    <form class="border p-4 rounded shadow bg-white" style="min-width: 350px;">
+<div class="container d-flex justify-content-center align-items-center  " style="min-height: 100vh;">
+    <form  [formGroup]="userForm" class="border p-4 rounded shadow bg-white" style="min-width: 450px;">
         <h3 class="mb-4 text-center">Add User Details</h3>
         <div class="mb-3">
             <label for="username" class="form-label">Username</label>
-            <input type="text" class="form-control" id="username" placeholder="Enter username">
+            <input type="text" class="form-control" id="username" formControlName="username"  placeholder="Enter username">
         </div>
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" placeholder="Enter email">
+            <input type="email" class="form-control" id="email" formControlName="email" placeholder="Enter email">
         </div>
         <div class="mb-3">
             <label for="age" class="form-label">Age</label>
-            <input type="number" class="form-control" id="age" placeholder="Enter age">
+            <input type="number" class="form-control" id="age" formControlName="age" placeholder="Enter age">
         </div>
         <div class="mb-3">
             <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" placeholder="Enter password">
+            <input type="password" class="form-control" id="password" formControlName="password" placeholder="Enter password">
         </div>
         <div class="mb-3">
             <label for="address" class="form-label">Address</label>
-            <input type="text" class="form-control" id="address" placeholder="Enter address">
+            <input type="text" class="form-control" id="address" formControlName="address" placeholder="Enter address">
         </div>
         <div class="d-flex justify-content-between">
-            <button type="button" class="btn btn-secondary">Cancel</button>
-            <button type="submit" class="btn btn-primary">Add</button>
+            <button type="button" class="btn btn-secondary" (click)="resetForm()">Cancel</button>
+            <button type="submit" class="btn btn-primary" (click)="submitForm()" >Add</button>
         </div>
     </form>
 </div>
