@@ -1,54 +1,154 @@
-<div class="container d-flex justify-content-center align-items-center  " style="min-height: 100vh;">
-    <form  [formGroup]="userForm" class="border p-4 rounded shadow bg-white" style="min-width: 450px;">
-        <h3 class="mb-4 text-center">Add User Details</h3>
-        <div class="mb-3">
-            <label for="username" class="form-label">Username
-                <span *ngIf="userForm.get('username')?.invalid && userForm.get('username')?.touched" class="text-danger ms-2" style="font-size: 0.9em;">
-                    <span *ngIf="userForm.get('username')?.errors?.['required']">Username is required.</span>
-                    <span *ngIf="userForm.get('username')?.errors?.['minlength']">Minimum 3 characters.</span>
-                </span>
-            </label>
-            <input type="text" class="form-control" id="username" formControlName="username"  placeholder="Enter username">
-
-        </div>
-        <div class="mb-3">
-            <label for="email" class="form-label">Email
-            <span *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched" class="text-danger ms-2" style="font-size: 0.9em;">
-                <span *ngIf="userForm.get('email')?.errors?.['required']">Email is required.</span>
-                <span *ngIf="userForm.get('email')?.errors?.['email']">Invalid email format.</span>
-            </span>
-            </label>
-            <input type="email" class="form-control" id="email" formControlName="email" placeholder="Enter email">
-        </div>
-        <div class="mb-3">
-            <label for="age" class="form-label">Age
-            <span *ngIf="userForm.get('age')?.invalid && userForm.get('age')?.touched" class="text-danger ms-2" style="font-size: 0.9em;">
-                <span *ngIf="userForm.get('age')?.errors?.['required']">Age is required.</span>
-                <span *ngIf="userForm.get('age')?.errors?.['min']">Minimum age is {{userForm.get('age')?.errors?.['min']?.min}}.</span>
-            </span>
-            </label>
-            <input type="number" class="form-control" id="age" formControlName="age" placeholder="Enter age">
-        </div>
-        <div class="mb-3">
-            <label for="password" class="form-label">Password
-            <span *ngIf="userForm.get('password')?.invalid && userForm.get('password')?.touched" class="text-danger ms-2" style="font-size: 0.9em;">
-                <span *ngIf="userForm.get('password')?.errors?.['required']">Password is required.</span>
-                <span *ngIf="userForm.get('password')?.errors?.['minlength']">Minimum 6 characters.</span>
-            </span>
-            </label>
-            <input type="password" class="form-control" id="password" formControlName="password" placeholder="Enter password">
-        </div>
-        <div class="mb-3">
-            <label for="address" class="form-label">Address
-            <span *ngIf="userForm.get('address')?.invalid && userForm.get('address')?.touched" class="text-danger ms-2" style="font-size: 0.9em;">
-                <span *ngIf="userForm.get('address')?.errors?.['required']">Address is required.</span>
-            </span>
-            </label>
-            <input type="text" class="form-control" id="address" formControlName="address" placeholder="Enter address">
-        </div>
-        <div class="d-flex justify-content-between">
-            <button type="button" class="btn btn-secondary" (click)="resetForm()">Cancel</button>
-            <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid" (click)="addUser()">Add</button>
-        </div>
-    </form>
+<div
+  class="container d-flex justify-content-center align-items-center"
+  style="min-height: 100vh"
+>
+  <form
+    [formGroup]="userForm"
+    class="border p-4 rounded shadow bg-white"
+    style="min-width: 450px"
+  >
+    <h3 class="mb-4 text-center">
+      {{ editUserId ? "Update User Details" : "Add User Details" }}
+    </h3>
+    <div class="mb-3">
+      <label for="username" class="form-label"
+        >Username
+        <span
+          *ngIf="
+            userForm.get('username')?.invalid &&
+            userForm.get('username')?.touched
+          "
+          class="text-danger ms-2"
+          style="font-size: 0.9em"
+        >
+          <span *ngIf="userForm.get('username')?.errors?.['required']"
+            >Username is required.</span
+          >
+          <span *ngIf="userForm.get('username')?.errors?.['minlength']"
+            >Minimum 3 characters.</span
+          >
+        </span>
+      </label>
+      <input
+        type="text"
+        class="form-control"
+        id="username"
+        formControlName="username"
+        placeholder="Enter username"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label"
+        >Email
+        <span
+          *ngIf="
+            userForm.get('email')?.invalid && userForm.get('email')?.touched
+          "
+          class="text-danger ms-2"
+          style="font-size: 0.9em"
+        >
+          <span *ngIf="userForm.get('email')?.errors?.['required']"
+            >Email is required.</span
+          >
+          <span *ngIf="userForm.get('email')?.errors?.['email']"
+            >Invalid email format.</span
+          >
+        </span>
+      </label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        formControlName="email"
+        placeholder="Enter email"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="age" class="form-label"
+        >Age
+        <span
+          *ngIf="userForm.get('age')?.invalid && userForm.get('age')?.touched"
+          class="text-danger ms-2"
+          style="font-size: 0.9em"
+        >
+          <span *ngIf="userForm.get('age')?.errors?.['required']"
+            >Age is required.</span
+          >
+          <span *ngIf="userForm.get('age')?.errors?.['min']"
+            >Minimum age is {{userForm.get('age')?.errors?.['min']?.min}}.</span
+          >
+        </span>
+      </label>
+      <input
+        type="number"
+        class="form-control"
+        id="age"
+        formControlName="age"
+        placeholder="Enter age"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label"
+        >Password
+        <span
+          *ngIf="
+            userForm.get('password')?.invalid &&
+            userForm.get('password')?.touched
+          "
+          class="text-danger ms-2"
+          style="font-size: 0.9em"
+        >
+          <span *ngIf="userForm.get('password')?.errors?.['required']"
+            >Password is required.</span
+          >
+          <span *ngIf="userForm.get('password')?.errors?.['minlength']"
+            >Minimum 6 characters.</span
+          >
+        </span>
+      </label>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        formControlName="password"
+        placeholder="Enter password"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="address" class="form-label"
+        >Address
+        <span
+          *ngIf="
+            userForm.get('address')?.invalid && userForm.get('address')?.touched
+          "
+          class="text-danger ms-2"
+          style="font-size: 0.9em"
+        >
+          <span *ngIf="userForm.get('address')?.errors?.['required']"
+            >Address is required.</span
+          >
+        </span>
+      </label>
+      <input
+        type="text"
+        class="form-control"
+        id="address"
+        formControlName="address"
+        placeholder="Enter address"
+      />
+    </div>
+    <div class="d-flex justify-content-between">
+      <button type="button" class="btn btn-secondary" (click)="resetForm()">
+        Back
+      </button>
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="userForm.invalid"
+        (click)="editUserId ? updateUser() : addUser()"
+      >
+        {{ editUserId ? "Update User" : "Add User" }}
+      </button>
+    </div>
+  </form>
 </div>

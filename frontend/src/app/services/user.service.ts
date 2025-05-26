@@ -18,6 +18,10 @@ export class UserService {
 deleteUser(id: number) {
   return this.httpClient.delete(this.apiUrl + '/user/' + id);
 }
+getUserById(id: number) {
+  return this.httpClient.get<User>(this.apiUrl + '/user/' + id);      
+}
+
 
 
 }
