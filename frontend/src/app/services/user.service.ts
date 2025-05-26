@@ -12,7 +12,7 @@ export class UserService {
   getUser() {
     return this.httpClient.get<User[]>(this.apiUrl + '/user');
   }
-  addUser(model: User) {
+ addUser(model: User) {
     return this.httpClient.post(this.apiUrl + '/user', model);
 }
 deleteUser(id: number) {
@@ -22,6 +22,9 @@ getUserById(id: number) {
   return this.httpClient.get<User>(this.apiUrl + '/user/' + id);      
 }
 
+updateUser( model: User) {
+  return this.httpClient.put(this.apiUrl + '/user', model);
 
+}
 
 }
