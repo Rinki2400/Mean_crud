@@ -12,18 +12,17 @@ export class UserService {
   getUser() {
     return this.httpClient.get<User[]>(this.apiUrl + '/user');
   }
- addUser(model: User) {
+  addUser(model: User) {
     return this.httpClient.post(this.apiUrl + '/user', model);
-}
-deleteUser(id: number) {
-  return this.httpClient.delete(this.apiUrl + '/user/' + id);
-}
-getUserById(id: number) {
-  return this.httpClient.get<User>(this.apiUrl + '/user/' + id);      
-}
+  }
+  deleteUser(id: number) {
+    return this.httpClient.delete(this.apiUrl + '/user/' + id);
+  }
+  getUserById(id: number) {
+    return this.httpClient.get<User>(this.apiUrl + '/user/' + id);
+  }
 
-updateUser(id: number, model: User) {
-  return this.httpClient.put(this.apiUrl + '/user/' + id, model);
-  
-}
+  updateUser(id: number, model: User) {
+    return this.httpClient.put(this.apiUrl + '/user/' + id, model);
+  }
 }
