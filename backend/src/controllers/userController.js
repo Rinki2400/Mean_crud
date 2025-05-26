@@ -63,61 +63,28 @@ exports.getByUsersId = async (req, res) => {
 }
 exports.deleteUser = async (req, res) => {
   try {
-    const userId = req.params.id;
-
-    // Check if ID format is valid
-    if (!mongoose.Types.ObjectId.isValid(userId)) {
-      return res.status(400).json({ message: "Invalid user ID format." });
+    const deletedUser = await User.findByIdAndDelete(req.params.id);
+    if (!deletedUser) {
+      return res.status(404).json({ message: "User not found. Deletion failed." });
     }
-
-    console.log("User ID received:", userId); // Debugging step
-
-    const deleteUser = await User.findByIdAndDelete(userId);
-    if (!deleteUser) {
-      return res
-        .status(404)
-        .json({ message: "User not found. Deletion failed." });
-    }
-
-    res
-      .status(200)
-      .json({ message: "User deleted successfully.", deletedUser: deleteUser });
+    res.status(200).json({ message: "User deleted successfully.", deletedUser });
   } catch (error) {
-    console.error("Error deleting user:", error.message);
-    res
-      .status(500)
-      .json({ message: "Internal Server Error", error: error.message });
+    res.status(500).json({ message: "Internal Server Error", error: error.message });
   }
 };
 exports.updateUser = async (req, res) => {
   try {
-    const { id } = req.params;
-    const updateData = req.body;
-
-    // Check if ID format is valid
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(400).json({ message: "Invalid user ID format." });
-    }
-
-    // Validate incoming request body
-    if (!updateData || Object.keys(updateData).length === 0) {
-      return res.status(400).json({ message: "Update data is missing. Provide valid fields." });
-    }
-
-    const updatedUser = await User.findByIdAndUpdate(id, updateData, {
-      new: true,
-      runValidators: true,
-    });
-
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
     if (!updatedUser) {
-      return res.status(404).json({ message: "User not found. Update failed." });
+      return res.status(404).json({ message: "User not found." });
     }
-
-    res.status(200).json({ message: "User updated successfully.", updatedUser });
-
+    res.json(updatedUser);
   } catch (error) {
-    console.error("Error updating user:", error.message);
-    res.status(500).json({ message: "Internal Server Error", error: error.message });
+    res.status(500).json({ error: error.message });
   }
 };
 

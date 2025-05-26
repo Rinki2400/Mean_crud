@@ -22,9 +22,8 @@ getUserById(id: number) {
   return this.httpClient.get<User>(this.apiUrl + '/user/' + id);      
 }
 
-updateUser( model: User) {
-  return this.httpClient.put(this.apiUrl + '/user', model);
-
+updateUser(id: number, model: User) {
+  return this.httpClient.put(this.apiUrl + '/user/' + id, model);
+  
 }
-
 }

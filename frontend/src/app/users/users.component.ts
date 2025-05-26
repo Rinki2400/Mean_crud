@@ -1,5 +1,5 @@
 
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import User from '../types/user';
 import { UserService } from '../services/user.service';
 import { CommonModule } from '@angular/common';
@@ -13,7 +13,7 @@ import { RouterLink } from '@angular/router';
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css'],
 })
-export class UsersComponent {
+export class UsersComponent implements OnInit {
 users:User[] = [];
 userService= inject(UserService);
 ngOnInit() {
@@ -22,7 +22,7 @@ ngOnInit() {
     console.log(this.users);
   });
 }
-deleteUser(id: User['_id']) {
+deleteUser(id: number) {
   if (confirm('Are you sure you want to delete this user?')) {
     this.userService.deleteUser(id).subscribe(() => {
       this.users = this.users.filter((user) => user._id !== id);
@@ -31,5 +31,6 @@ deleteUser(id: User['_id']) {
   } else {
     console.log('User deletion cancelled');
   }
-} 
+}
+
 }

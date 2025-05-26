@@ -67,25 +67,24 @@ export class UsersFormComponent implements OnInit {
     }
   }
 
-  updateUser() {
-    if (this.userForm.valid) {
-      const model: User = this.userForm.value as User;
-      model._id = this.editUserId;
+updateUser() {
+  if (this.userForm.valid) {
+    const model: User = this.userForm.value as User;
+    model._id = this.editUserId; // Ensure ID is set correctly
 
-      this.userService.updateUser(model).subscribe({
-        next: (response) => {
-          console.log('User updated successfully:', response);
-          this.resetForm();
-        },
-        error: (error) => {
-          console.error('Error updating user:', error);
-        },
-      });
-    } else {
-      console.log('Form is invalid');
-    }
+    this.userService.updateUser(this.editUserId, model).subscribe({
+      next: (response) => {
+        console.log('User updated successfully:', response);
+        this.resetForm();
+      },
+      error: (error) => {
+        console.error('Error updating user:', error);
+      },
+    });
+  } else {
+    console.log('Form is invalid');
   }
-
+}
   resetForm() {
     this.userForm.reset();
     this.router.navigate(['/users']);
